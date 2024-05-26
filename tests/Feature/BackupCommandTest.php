@@ -22,7 +22,7 @@ class BackupCommandTest extends TestCase
         $destination = $this->createTempDirectory('destination');
         $this->setEnvironmentVariable('REPOS_DESTINATION', $destination);
 
-        $this->artisan('repos:backup', []);
+        $this->artisan('repos:backup', [])->assertExitCode(0);
 
         $this->assertDirectoryExists($destination . DIRECTORY_SEPARATOR . $repo->title);
         $this->assertDirectoryDoesNotExist('storage/app/repos/' . $repo->title);

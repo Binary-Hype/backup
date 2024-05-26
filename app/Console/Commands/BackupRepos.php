@@ -25,7 +25,7 @@ class BackupRepos extends Command
     /**
      * Execute the console command.
      */
-    public function handle():int
+    public function handle(): int
     {
         $repos = Repository::all();
 
