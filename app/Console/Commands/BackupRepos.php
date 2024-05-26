@@ -25,7 +25,7 @@ class BackupRepos extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle():int
     {
         $repos = Repository::all();
 
@@ -46,13 +46,11 @@ class BackupRepos extends Command
                 return 1;
             }
 
-            $destinationUser = env('REPOS_DESTIONATION_USER');
-            $destinationServer = env('REPOS_DESTIONATION_SERVER');
-            $destinationPath = env('REPOS_DESTIONATION_PATH');
+            $destination = env('REPOS_DESTINATION');
 
             // Transfer the cloned repository to the destination server
-            $this->info("Transferring repository to $destinationServer:$destinationPath...");
-            $transferCommand = "rsync --progress --delete -e 'ssh -p23' --recursive $localDir $destinationUser@$destinationServer:$destinationPath";
+            $this->info("Transferring repository to $destination...");
+            $transferCommand = "rsync --progress --delete -e 'ssh -p23' --recursive $localDir $destination";
             exec($transferCommand, $output, $returnVar);
 
             if ($returnVar !== 0) {

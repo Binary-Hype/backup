@@ -21,8 +21,8 @@ class RepositoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(4),
-            'repoUrl' => $this->faker->word(),
+            'title' => $this->faker->unique()->sentence(4)    ,
+            'repoUrl' => $this->faker->randomElement(['git@github.com:Binary-Hype/backup.git', 'git@github.com:Binary-Hype/binary-hype.git']),
         ];
     }
 }
