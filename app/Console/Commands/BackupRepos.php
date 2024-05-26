@@ -30,7 +30,7 @@ class BackupRepos extends Command
         $repos = Repository::all();
 
         foreach ($repos as $repo) {
-            $localDir = storage_path('app/repos/' . $repo->title);
+            $localDir = storage_path('app/repos/' . strtolower(str_replace(' ', '-', $repo->title)));
 
             // Ensure the local directory exists
             if (!is_dir($localDir)) {
